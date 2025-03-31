@@ -1,0 +1,4 @@
+This is a document of other ideas we had beyond the MVP, to be possibly re-examined later and implemented.
+
+- Fuzzy Matching
+- ideally we would also track when posts were taken down
