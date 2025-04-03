@@ -27,6 +27,21 @@ driver = webdriver.Chrome(service=service, options=options)
 
 driver.get("https://gainesville.craigslist.org/search/ccc#search=1~list~0~0")
 
+# a list of links to scrape that grabs the whole US (including Hawaii & Canada)
+# issue: lots of overlap in radii, but no way to select US as a whole on craigslist.com
+# other options: some kind of HTML way to scrape all US without double dipping, https://allcraigslistsearch.com (pictures and scrapes Facebook, OfferUp, and eBay), www.searchallcraigslist.org (not all pictures scraped)
+list_of_cities = ['https://provo.craigslist.org/search/hanna-ut/pet?lat=40.5603&lon=-111.0339&search_distance=960#search=1~gallery~0~0', # western US (pets category)
+              'https://provo.craigslist.org/search/hanna-ut/sss?lat=40.5603&lon=-111.0339&search_distance=960#search=1~gallery~0~0', # western US (general for sale category)
+              'https://ksu.craigslist.org/search/barnes-ks/pet?lat=39.7455&lon=-96.8471&search_distance=960#search=1~gallery~0~0', # central US (pets category)
+              'https://ksu.craigslist.org/search/barnes-ks/sss?lat=39.7455&lon=-96.8471&search_distance=960#search=1~gallery~0~0', # central US (general for sale category)
+              'https://athensohio.craigslist.org/search/union-furnace-oh/pet?lat=39.4295&lon=-82.4142&search_distance=960#search=1~gallery~0~0', # eastern US (pets category)
+              'https://athensohio.craigslist.org/search/union-furnace-oh/sss?lat=39.4295&lon=-82.4142&search_distance=960#search=1~gallery~0~0', # eastern US (general for sale category)
+              'https://fairbanks.craigslist.org/location/hughes-ak?lat=65.4189&lon=-153.3024&search_distance=570', # northern Alaska
+              'https://kenai.craigslist.org/location/old-harbor-ak?lat=55.7271&lon=-149.6777&search_distance=570', # southern Alaska
+              'https://honolulu.craigslist.org/location/waianae-hi?lat=21.2484&lon=-158.7524&search_distance=320'] # Hawaii
+
+
+
 # loads the webpage, and waits until either 10 seconds have passed or the posting titles have loaded
 try:
     WebDriverWait(driver, 10).until(
