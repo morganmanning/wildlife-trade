@@ -45,18 +45,27 @@ def collect_training_data(num_samples = 100):
     
     
     # list of Craigslist regions that cover the whole US (lots of overlap though)
-    list_of_cities = [
-        'https://provo.craigslist.org/search/hanna-ut/pet?lat=40.5603&lon=-111.0339&search_distance=960#search=1~gallery~0~0', # western US (pets category)
-        'https://provo.craigslist.org/search/hanna-ut/sss?lat=40.5603&lon=-111.0339&search_distance=960#search=1~gallery~0~0', # western US (general for sale category)
-        'https://ksu.craigslist.org/search/barnes-ks/pet?lat=39.7455&lon=-96.8471&search_distance=960#search=1~gallery~0~0', # central US (pets category)
-        'https://ksu.craigslist.org/search/barnes-ks/sss?lat=39.7455&lon=-96.8471&search_distance=960#search=1~gallery~0~0', # central US (general for sale category)
-        'https://athensohio.craigslist.org/search/union-furnace-oh/pet?lat=39.4295&lon=-82.4142&search_distance=960#search=1~gallery~0~0', # eastern US (pets category)
-        'https://athensohio.craigslist.org/search/union-furnace-oh/sss?lat=39.4295&lon=-82.4142&search_distance=960#search=1~gallery~0~0', # eastern US (general for sale category)
-        'https://fairbanks.craigslist.org/location/hughes-ak?lat=65.4189&lon=-153.3024&search_distance=570', # northern Alaska
-        'https://kenai.craigslist.org/location/old-harbor-ak?lat=55.7271&lon=-149.6777&search_distance=570', # southern Alaska
-        'https://honolulu.craigslist.org/location/waianae-hi?lat=21.2484&lon=-158.7524&search_distance=320' # Hawaii
-    ]
+    # list_of_cities = [
+    #     'https://provo.craigslist.org/search/hanna-ut/pet?lat=40.5603&lon=-111.0339&search_distance=960#search=1~gallery~0~0', # western US (pets category)
+    #     'https://provo.craigslist.org/search/hanna-ut/sss?lat=40.5603&lon=-111.0339&search_distance=960#search=1~gallery~0~0', # western US (general for sale category)
+    #     'https://ksu.craigslist.org/search/barnes-ks/pet?lat=39.7455&lon=-96.8471&search_distance=960#search=1~gallery~0~0', # central US (pets category)
+    #     'https://ksu.craigslist.org/search/barnes-ks/sss?lat=39.7455&lon=-96.8471&search_distance=960#search=1~gallery~0~0', # central US (general for sale category)
+    #     'https://athensohio.craigslist.org/search/union-furnace-oh/pet?lat=39.4295&lon=-82.4142&search_distance=960#search=1~gallery~0~0', # eastern US (pets category)
+    #     'https://athensohio.craigslist.org/search/union-furnace-oh/sss?lat=39.4295&lon=-82.4142&search_distance=960#search=1~gallery~0~0', # eastern US (general for sale category)
+    #     'https://fairbanks.craigslist.org/search/hughes-ak/sss?lat=65.4189&lon=-153.3024&search_distance=570#search=2~gallery~0', # northern Alaska (general for sale category)
+    #     'https://fairbanks.craigslist.org/search/hughes-ak/pet?lat=65.4189&lon=-153.3024&search_distance=570#search=2~gallery~0', # northern Alaska (pets category)
+    #     'https://kenai.craigslist.org/search/old-harbor-ak/sss?lat=55.7271&lon=-149.6777&search_distance=570#search=2~gallery~0', # southern Alaska (general for sale category)
+    #     'https://kenai.craigslist.org/search/old-harbor-ak/pet?lat=55.7271&lon=-149.6777&search_distance=570#search=2~gallery~0', # southern Alaska (pets category)
+    #     'https://honolulu.craigslist.org/search/waianae-hi/pet?lat=21.2484&lon=-158.7524&search_distance=320#search=2~gallery~0', # Hawaii (pets category)
+    #     'https://honolulu.craigslist.org/search/waianae-hi/sss?lat=21.2484&lon=-158.7524&search_distance=320#search=2~gallery~0' # Hawaii (general for sale category)
+    # ]
     
+    # just Gainesville for now to test
+    list_of_cities = [
+        'https://gainesville.craigslist.org/search/gainesville-fl/sss?lat=29.669&lon=-82.332&search_distance=30#search=2~gallery~0',
+        'https://gainesville.craigslist.org/search/gainesville-fl/pet?lat=29.669&lon=-82.332&search_distance=30#search=2~gallery~0'
+    ]
+
     # boilerplate code for initalizing the webdriver and connecting the code to chrome (August)
     # determine OS used so the correct chromedriver is used
     system = platform.system()
