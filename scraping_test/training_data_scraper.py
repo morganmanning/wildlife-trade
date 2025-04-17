@@ -2,6 +2,7 @@ import csv
 import os
 import random
 import time
+import platform
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -11,18 +12,19 @@ import gbif_data_converter as dc
 import re
 from tqdm import tqdm  # progress bar
 
+
 def collect_training_data(num_samples = 100):
     """
     Collect a training dataset from Craigslist ads that contain keywords.
     Will randomly select 100 ads from those containing keywords.
     """
-   ##### Define the keyword list for initial filtering
+    ##### Define the keyword list for initial filtering
     # calls gbif_data_converter to turn the gbif backbone into a csv of common names
     # eventually this will check if the CSV already exists before remaking it (copied from August)
-    if not os.path.isfile("scraping_test/data/common_names.csv"):
-        names = dc.clean_data("gbif_backbone/VernacularName.tsv", "common_names")
+    if not os.path.isfile("../scraping_test/data/common_names.csv"):
+        names = dc.clean_data("../gbif_backbone/VernacularName.tsv", "common_names")
     else: 
-        with open("scraping_test/data/common_names.csv") as f:
+        with open("../scraping_test/data/common_names.csv") as f:
             f = csv.reader(f)
             next(f)
             names = [str(name[0]).strip().lower() for name in f]
@@ -56,7 +58,18 @@ def collect_training_data(num_samples = 100):
     ]
     
     # boilerplate code for initalizing the webdriver and connecting the code to chrome (August)
-    service = Service(executable_path="scraping_test/chromedriver-mac-arm64/chromedriver") 
+    # determine OS used so the correct chromedriver is used
+    system = platform.system()
+    print(f"Detected OS: {system}")
+    if system == "Darwin":  # macOS (unconfirmed if this runs, didn't try on Mac)
+        chromedriver_path = "../scraping_test/chromedriver-mac-arm64/chromedriver"
+    elif system == "Linux":
+        chromedriver_path = "../scraping_test/chromedriver-linux64/chromedriver"
+        # https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/135.0.7049.95/linux64/chromedriver-linux64.zip (can replace version number with latest)
+    else:
+        raise OSError(f"Unsupported OS: {system}")
+
+    service = Service(executable_path = chromedriver_path)
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')  # keeps the webpage from showing
     driver = webdriver.Chrome(service = service, options = options)
